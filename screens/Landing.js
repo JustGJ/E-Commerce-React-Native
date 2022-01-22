@@ -4,7 +4,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import CourseItem from '../components/CourseItem';
 import EmptyData from '../components/EmptyData';
 
-const Landing = () => {
+const Landing = ({ navigation }) => {
     const existingCourses = useSelector((state) => state.courses.existingCourses);
 
     // Si pas de cours afficher, return un message
@@ -22,8 +22,8 @@ const Landing = () => {
                         image={item.image}
                         title={item.title}
                         price={item.price}
-                        viewDetails={() => alert('Details')}
-                        onAddToCart={() => alert('Panier')}
+                        viewDetails={() => navigation.navigate('Details', { courseId: item.id })}
+                        onAddToCart={() => navigation.navigate('Cart')}
                     />
                 )}
                 keyExtractor={(item) => item.id}

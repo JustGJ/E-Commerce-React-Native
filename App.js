@@ -1,12 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import AppNav from './routes/AppNav';
 import Landing from './screens/Landing';
 
 export default function App() {
     return (
         <Provider store={store}>
-            <Landing />
+            {/* Tout les screens présents dans AppNav, auront accès aux props navigation et route */}
+            <AppNav />
         </Provider>
     );
 }
