@@ -18,7 +18,13 @@ const Landing = () => {
             <FlatList
                 data={existingCourses}
                 renderItem={({ item }) => (
-                    <CourseItem image={item.image} title={item.title} price={item.price} />
+                    <CourseItem
+                        image={item.image}
+                        title={item.title}
+                        price={item.price}
+                        viewDetails={() => alert('Details')}
+                        onAddToCart={() => alert('Panier')}
+                    />
                 )}
                 keyExtractor={(item) => item.id}
             />
