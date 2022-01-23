@@ -22,7 +22,9 @@ const Landing = ({ navigation }) => {
                         image={item.image}
                         title={item.title}
                         price={item.price}
-                        viewDetails={() => navigation.navigate('Details', { courseId: item.id })}
+                        viewDetails={() =>
+                            navigation.navigate('Details', { courseId: item.id, title: item.title })
+                        }
                         onAddToCart={() => navigation.navigate('Cart')}
                     />
                 )}
