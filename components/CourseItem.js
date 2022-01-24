@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import globalStyles from '../styles/globalStyles';
 
