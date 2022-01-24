@@ -1,18 +1,27 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ScrollView, StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { addToCart } from '../redux/actions/addToCart.action';
 import globalStyles from '../styles/globalStyles';
 
 // Details
 const CourseInfos = ({ navigation, route }) => {
     const courseId = route.params.courseId; // id du cours passé en param via FlatList
+    const dispatch = useDispatch();
 
     // On return le cours dont l'id transmit est égal à celui qui est parcouru dans notre store
     // On pouvait aussi passer par les props ...
     const selectedCourse = useSelector((state) =>
         state.courses.existingCourses.find((course) => course.id === courseId)
     );
+
+    // Ajout dans panier, et retour page précédent
+    const handleAddToCart = () => {
+        dispatch(addToCart(selectedCourse));
+        navigation.goBack();
+        alert('Article ajouté au panier');
+    };
 
     return (
         <View>
@@ -38,7 +47,7 @@ const CourseInfos = ({ navigation, route }) => {
                         <Text style={styles.coursePrice}>{selectedCourse.price.toFixed(2)} €</Text>
                     </View>
                 </View>
-                {/* Buttons actions */}
+                {/* Buttons actions goBack() and addCart */}
                 <View style={styles.footerBottom}>
                     <MaterialIcons
                         name="arrow-back-ios"
@@ -46,7 +55,7 @@ const CourseInfos = ({ navigation, route }) => {
                         color={globalStyles.white}
                         onPress={() => navigation.goBack()}
                     />
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleAddToCart}>
                         <View style={styles.btnAddTocart}>
                             <Text style={styles.btnAddToCartText}>Ajouter au panier</Text>
                         </View>

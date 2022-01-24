@@ -1,13 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, StyleSheet, View } from 'react-native';
 import CourseItem from '../components/CourseItem';
 import EmptyData from '../components/EmptyData';
+import { addToCart } from '../redux/actions/addToCart.action';
+import CartCourse from '../data/CartCourseModel';
 
 const Landing = ({ navigation }) => {
+    const dispatch = useDispatch();
     const existingCourses = useSelector((state) => state.courses.existingCourses);
 
-    // Si pas de cours afficher, return un message
+    const handleAddToCart = (course) => {
+        dispatch(addToCart(course));
+        alert('Article ajouté au panier');
+    };
+
+    // Si pas de cours dans le store, return un message
     if (!existingCourses.length) {
         return <EmptyData text="Pas de cours à afficher" />;
     }
@@ -25,7 +33,7 @@ const Landing = ({ navigation }) => {
                         viewDetails={() =>
                             navigation.navigate('Details', { courseId: item.id, title: item.title })
                         }
-                        onAddToCart={() => navigation.navigate('Cart')}
+                        onAddToCart={() => handleAddToCart(item)}
                     />
                 )}
                 keyExtractor={(item) => item.id}
