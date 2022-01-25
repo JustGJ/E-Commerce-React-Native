@@ -1,13 +1,15 @@
 import { FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import React from 'react';
 import EmptyData from '../components/EmptyData';
 import CoursesInCart from '../components/CoursesInCart';
 import globalStyles from '../styles/globalStyles';
+import { removeCourseToCart } from '../redux/actions/removeCourseToCart.action';
 
 const Cart = () => {
     const cartCourses = useSelector((state) => state.cart.cartCourses);
     const totalCourses = useSelector((state) => state.cart.total);
+    const dispatch = useDispatch();
 
     // Si pas de cours dans le Panier, return un message
     if (!cartCourses.length) {
@@ -23,7 +25,7 @@ const Cart = () => {
                         <CoursesInCart
                             title={item.title}
                             price={item.price}
-                            onDelete={() => alert('Effacer le cours')}
+                            onDelete={() => dispatch(removeCourseToCart(item.id))}
                         />
                     )}
                 />
