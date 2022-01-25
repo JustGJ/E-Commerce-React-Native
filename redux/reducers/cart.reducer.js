@@ -1,5 +1,5 @@
 import CartCourse from '../../data/CartCourseModel';
-import { ADD_TO_CART, REMOVE_COURSE_CART } from '../constants';
+import { ADD_PAYMENT, ADD_TO_CART, REMOVE_COURSE_CART } from '../constants';
 
 const initialState = {
     cartCourses: [], // {IdCourse, price, title}
@@ -29,6 +29,10 @@ const cartReducer = (state = initialState, action) => {
                 cartCourses: newCartCoursesArray,
                 total: state.total - coursePrice,
             };
+        }
+        // Lorsque l'on valide le paiement, on remet cart vide
+        case ADD_PAYMENT: {
+            return initialState;
         }
         default:
             return state;

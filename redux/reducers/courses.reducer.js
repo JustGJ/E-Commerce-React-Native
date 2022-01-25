@@ -21,7 +21,7 @@ const coursesReducer = (state = initialState, action) => {
                 existingCourses: copyExistingCourses,
             };
 
-        // Lorsqu'un cours est supprimé du cart, on le passe en selected = false
+        // Lorsqu'un cours est supprimé du cart, on le passe en selected = false pour qu'il réaparaisse dans la liste des cours
         case REMOVE_COURSE_CART:
             const indexCourseToDeleteFromCart = state.existingCourses.findIndex(
                 (course) => course.id === action.courseId

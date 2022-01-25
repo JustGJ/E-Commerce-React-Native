@@ -1,15 +1,22 @@
+import React from 'react';
 import { FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import React from 'react';
 import EmptyData from '../components/EmptyData';
 import CoursesInCart from '../components/CoursesInCart';
 import globalStyles from '../styles/globalStyles';
+import { addPayment } from '../redux/actions/payment.action';
 import { removeCourseToCart } from '../redux/actions/removeCourseToCart.action';
 
 const Cart = () => {
     const cartCourses = useSelector((state) => state.cart.cartCourses);
     const totalCourses = useSelector((state) => state.cart.total);
     const dispatch = useDispatch();
+
+    // Paiement
+    const handlePayment = (cartCourses, total) => {
+        dispatch(addPayment(cartCourses, total));
+        alert('Paiement effectué !');
+    };
 
     // Si pas de cours dans le Panier, return un message
     if (!cartCourses.length) {
@@ -33,7 +40,7 @@ const Cart = () => {
                     <Text style={styles.totalText}>
                         Total :<Text style={styles.totalPrice}>{totalCourses.toFixed(2)} €</Text>
                     </Text>
-                    <TouchableOpacity onPress={() => alert('Payer')}>
+                    <TouchableOpacity onPress={() => handlePayment(cartCourses, totalCourses)}>
                         <View style={styles.btnAddPayment}>
                             <Text style={styles.btnAddPaymentText}>Payer</Text>
                         </View>
