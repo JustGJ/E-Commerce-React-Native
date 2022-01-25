@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScrollView, StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -16,7 +16,7 @@ const CourseInfos = ({ navigation, route }) => {
         state.courses.existingCourses.find((course) => course.id === courseId)
     );
 
-    // Ajout dans panier, et retour page précédent
+    // Ajout panier : Déclenche ADD_TO_CART dans cart.reducer et courses.reducer
     const handleAddToCart = () => {
         dispatch(addToCart(selectedCourse));
         navigation.goBack();
