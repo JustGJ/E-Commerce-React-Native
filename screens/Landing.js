@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FlatList, View } from 'react-native';
+import { FlatList, TextInput, View } from 'react-native';
+
 import CourseItem from '../components/CourseItem';
 import EmptyData from '../components/EmptyData';
 import { addToCart } from '../redux/actions/addToCart.action';
@@ -24,6 +25,7 @@ const Landing = ({ navigation }) => {
     // Sinon on afficher les cours
     return (
         <View>
+            <TextInput testID="input" value="salut" />
             <FlatList
                 data={coursesToDisplay}
                 renderItem={({ item }) => (
