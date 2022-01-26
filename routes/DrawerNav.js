@@ -12,7 +12,7 @@ const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
     return (
-        // Le Navigator doit contenir des Screen éléments comme enfants pour définir la configuration des itinéraires.
+        // Le Navigator doit contenir des Screen éléments comme enfants pour définir la configuration des itinéraires. Drawer possède un header a true par défault
         <Drawer.Navigator
             screenOptions={({ navigation }) => ({
                 headerTintColor: 'white',
