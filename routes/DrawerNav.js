@@ -1,15 +1,35 @@
 import React from 'react';
-// import { createDrawerNavigator } from '@react-navigation/drawer';
-// import { MaterialIcons } from ' @expo/vector-icons';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { MaterialIcons } from '@expo/vector-icons';
 import { CoursesNavigator } from './CoursesStackNav';
 import { CartNavigator } from './CartStackNav';
 import { PaymentNavigator } from './PaymentStackNav';
+import globalStyles from '../styles/globalStyles';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import CustomHeaderIcon from '../components/CustomHeaderIcon';
 
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator = () => {
     return (
-        <Drawer.Navigator>
+        // Le Navigator doit contenir des Screen éléments comme enfants pour définir la configuration des itinéraires.
+        <Drawer.Navigator
+            screenOptions={({ navigation }) => ({
+                headerTintColor: 'white',
+                headerStyle: {
+                    backgroundColor: globalStyles.green,
+                },
+                headerRight: () => (
+                    <HeaderButtons HeaderButtonComponent={CustomHeaderIcon}>
+                        <Item
+                            title="Panier"
+                            iconName="shopping-cart"
+                            onPress={() => navigation.navigate('Cart')}
+                        />
+                    </HeaderButtons>
+                ),
+            })}>
+            {/* Onglet Home */}
             <Drawer.Screen
                 name="Home"
                 component={CoursesNavigator}
@@ -18,6 +38,7 @@ export const DrawerNavigator = () => {
                     drawerIcon: () => <MaterialIcons name="menu-book" size={24} />,
                 }}
             />
+            {/* Onglet Cart */}
             <Drawer.Screen
                 name="Cart"
                 component={CartNavigator}
@@ -26,12 +47,13 @@ export const DrawerNavigator = () => {
                     drawerIcon: () => <MaterialIcons name="shopping-cart" size={24} />,
                 }}
             />
+            {/* Onglet Payment */}
             <Drawer.Screen
                 name="Payments"
                 component={PaymentNavigator}
                 options={{
                     title: 'Achats',
-                    drawerIcon: () => <MaterialIcons name="credit-cart" size={24} />,
+                    drawerIcon: () => <MaterialIcons name="credit-card" size={24} />,
                 }}
             />
         </Drawer.Navigator>

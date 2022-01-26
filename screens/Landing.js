@@ -25,7 +25,6 @@ const Landing = ({ navigation }) => {
     // Sinon on afficher les cours
     return (
         <View>
-            <TextInput testID="input" value="salut" />
             <FlatList
                 data={coursesToDisplay}
                 renderItem={({ item }) => (
