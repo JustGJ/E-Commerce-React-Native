@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { CoursesNavigator } from './CoursesStackNav';
 import { DrawerNavigator } from './DrawerNav';
 
 // NavigationContainer est un composant qui gère notre arbre de navigation et contient l'état de navigation .
@@ -9,7 +8,6 @@ import { DrawerNavigator } from './DrawerNav';
 const AppNav = () => {
     return (
         <NavigationContainer>
-            {/* <CoursesNavigator /> */}
             <DrawerNavigator />
         </NavigationContainer>
     );
