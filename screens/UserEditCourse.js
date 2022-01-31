@@ -8,6 +8,10 @@ import { formReducer } from '../formData.js/formReducer';
 import { createCourse } from '../redux/actions/createCourse.action';
 import { editCourse } from '../redux/actions/editCourse.action';
 import globalStyles from '../styles/globalStyles';
+import axios from 'axios';
+
+// import { db } from '../firebase';
+// import { collection, query, onSnapshot, doc, updateDoc, deleteDoc, addDoc } from 'firebase/firestore';
 
 const UserEditCourse = ({ navigation, route }) => {
     const courseId = route.params.courseId;
@@ -38,16 +42,34 @@ const UserEditCourse = ({ navigation, route }) => {
 
     const [formState, formDispatch] = useReducer(formReducer, formInitialState);
 
-    const handlePressForm = () => {
+    const handlePressForm = async () => {
         const { title, img, price, desc } = formState.inputValues;
 
+        const cours = {
+            title,
+            img,
+            price,
+            desc,
+        };
         // Mise à jour du cours : Si on a un id passé en param via "Editer", alors on modifie le cours
         if (courseId) {
-            dispatch(editCourse(courseId, title, img, desc));
+            // await updateDoc(doc(db, 'courses', courses.id), { title: title, img: img, desc: desc });
+            // dispatch(editCourse(courseId, title, img, desc));
         }
         // Sinon on crée le cours
         else {
-            dispatch(createCourse(title, desc, img, parseInt(price)));
+            axios
+                .post('https://e-courses-coder-default-rtdb.firebaseio.com/courses.json', cours)
+                .then((res) => console.log(res))
+                .catch((error) => {
+                    console.log(error);
+                });
+            // await addDoc(collection(db, 'courses'), {
+            //     title,
+            //     desc,
+            //     price,
+            // });
+            // dispatch(createCourse(title, desc, img, parseInt(price)));
         }
         navigation.goBack();
     };

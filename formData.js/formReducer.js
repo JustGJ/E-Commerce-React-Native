@@ -18,7 +18,7 @@ export const formReducer = (state, action) => {
             let updatedFormIsValid = true;
             for (const key in updatedIsValidInput) {
                 updatedFormIsValid = updatedFormIsValid && updatedIsValidInput[key];
-                console.log(updatedFormIsValid);
+                // console.log(updatedFormIsValid);
             }
 
             return {

@@ -16,7 +16,7 @@ const CourseItem = ({ image, title, price, viewDetails, onAddToCart }) => {
                 {/* Details (title, price)  */}
                 <View style={styles.courseContainerDetails}>
                     <Text style={styles.courseTitle}>{title}</Text>
-                    <Text style={styles.coursePrice}>{price.toFixed(2)} €</Text>
+                    {/* <Text style={styles.coursePrice}>{price.toFixed(2)} €</Text> */}
                 </View>
                 {/* Icons (eye, basket) */}
                 <View style={styles.iconsContainer}>
