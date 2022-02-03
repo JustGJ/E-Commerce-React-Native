@@ -21,7 +21,6 @@ const initialState = {
 };
 
 const coursesReducer = (state = initialState, action) => {
-    console.log(action.courses);
     switch (action.type) {
         case GET_COURSES:
             return {

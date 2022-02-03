@@ -7,7 +7,6 @@ import CourseItem from '../components/CourseItem';
 import EmptyData from '../components/EmptyData';
 import { addToCart } from '../redux/actions/addToCart.action';
 import { getCourses } from '../redux/actions/getCourses.action';
-import { parse } from 'expo-linking';
 
 // import { collection, query, onSnapshot, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 // import { db } from '../firebase';
@@ -29,8 +28,6 @@ const Landing = ({ navigation }) => {
     // }, []);
     const courses = useSelector((state) => state.courses.courses); // Tout les cours
 
-    console.log(courses);
-
     // Si pas de cours dans le store, return un message
     // if (!coursesToDisplay.length) {
     //     return <EmptyData text="Pas de cours à afficher" />;
@@ -39,6 +36,7 @@ const Landing = ({ navigation }) => {
     // Sinon on afficher les cours
     return (
         <View>
+            <TextInput placeholder="yes" />
             <FlatList
                 data={data}
                 renderItem={({ item }) => (

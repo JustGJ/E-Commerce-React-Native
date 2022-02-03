@@ -93,6 +93,8 @@ const UserEditCourse = ({ navigation, route }) => {
 
     return (
         <ScrollView>
+            <Input placeholder="yes" />
+
             <View style={styles.formContainer}>
                 {/* Titre */}
                 <Input

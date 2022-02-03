@@ -2,12 +2,12 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react-native';
 import store from '../../redux/store';
-import Landing from '../Landing';
+import UserEditCourse from '../UserEditCourse';
 
 test('Shows "Hello world!"', () => {
     const { getByPlaceholderText } = render(
         <Provider store={store}>
-            <Landing />
+            <UserEditCourse />
         </Provider>
     );
 
