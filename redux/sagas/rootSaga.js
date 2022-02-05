@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
-import { onLoadCoursesAsync } from './courses.saga';
+import { watchOnLoadCourses } from './courses.saga';
 
 export default function* rootSaga() {
-    yield all([onLoadCoursesAsync()]);
+    yield all([watchOnLoadCourses()]);
 }

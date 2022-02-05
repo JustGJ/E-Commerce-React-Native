@@ -4,16 +4,17 @@ import { ScrollView, StyleSheet, Image, View, Text, TouchableOpacity } from 'rea
 import { MaterialIcons } from '@expo/vector-icons';
 import { addToCart } from '../redux/actions/addToCart.action';
 import globalStyles from '../styles/globalStyles';
+import { RootState } from '../redux/reducers/rootReducer';
 
 // Details
 const CourseInfos = ({ navigation, route }) => {
-    const courseId = route.params.courseId; // id du cours passé en param via FlatList
+    const courseId = route.params.courseId; // id du cours passé en param via CourseItm
     const dispatch = useDispatch();
 
     // On return le cours dont l'id transmit est égal à celui qui est parcouru dans notre store
     // On pouvait aussi passer par les props ...
-    const selectedCourse = useSelector((state) =>
-        state.courses.existingCourses.find((course) => course.id === courseId)
+    const selectedCourse = useSelector((state: any) =>
+        state.courses.courses.find((course) => course.id === courseId)
     );
 
     // Ajout panier : Déclenche ADD_TO_CART dans cart.reducer et courses.reducer
@@ -28,14 +29,14 @@ const CourseInfos = ({ navigation, route }) => {
             {/* ScrollView */}
             <ScrollView style={styles.scroll}>
                 {/* Image */}
-                <Image source={{ uri: selectedCourse.image }} style={styles.courseImage} />
+                <Image source={{ uri: selectedCourse.img }} style={styles.courseImage} />
                 {/* Details */}
                 <View style={styles.courseDetails}>
-                    <Text style={styles.courseDescription}>{selectedCourse.description}</Text>
-                    <Text style={styles.courseDescription}>{selectedCourse.description}</Text>
-                    <Text style={styles.courseDescription}>{selectedCourse.description}</Text>
-                    <Text style={styles.courseDescription}>{selectedCourse.description}</Text>
-                    <Text style={styles.courseDescription}>{selectedCourse.description}</Text>
+                    <Text style={styles.courseDescription}>{selectedCourse.desc}</Text>
+                    {/* <Text style={styles.courseDescription}>{selectedCourse.desc}</Text>
+                    <Text style={styles.courseDescription}>{selectedCourse.desc}</Text>
+                    <Text style={styles.courseDescription}>{selectedCourse.desc}</Text>
+                    <Text style={styles.courseDescription}>{selectedCourse.desc}</Text> */}
                 </View>
             </ScrollView>
 
@@ -44,7 +45,7 @@ const CourseInfos = ({ navigation, route }) => {
                 {/* Price */}
                 <View style={styles.footerTop}>
                     <View style={styles.coursePriceWrapper}>
-                        <Text style={styles.coursePrice}>{selectedCourse.price.toFixed(2)} €</Text>
+                        <Text style={styles.coursePrice}>{parseInt(selectedCourse.price).toFixed(2)} €</Text>
                     </View>
                 </View>
                 {/* Buttons actions goBack() and addCart */}

@@ -1,48 +1,44 @@
+import * as actionType from '../actionTypes/coursesActionTypes';
 import CourseModel from '../../data/CourseModel';
 import COURSES from '../../data/testData';
-import {
-    ADD_TO_CART,
-    CREATE_COURSE,
-    DELETE_COURSE,
-    EDIT_COURSE,
-    GET_COURSES,
-    GET_COURSES_FAILED,
-    GET_COURSES_SUCCESS,
-    REMOVE_COURSE_CART,
-} from '../constants';
+import { GET_COURSES, GET_COURSES_FAILED, GET_COURSES_SUCCESS } from '../constants';
 
-const initialState = {
-    existingCourses: COURSES,
-    loggedInMemberCourses: COURSES.filter((course) => course.instructorId === '1'),
-
-    courses: {},
+export interface ICoursesState {
+    courses: Object;
+    error: string | null;
+    loading: Boolean;
+}
+const initialState: ICoursesState = {
+    courses: [],
     error: null,
     loading: false,
 };
 
-const coursesReducer = (state = initialState, action) => {
+const coursesReducer = (state: ICoursesState = initialState, action: actionType.CoursesAction) => {
     switch (action.type) {
-        case GET_COURSES:
+        case actionType.GET_COURSES_REQUEST:
             return {
                 ...state,
                 loading: true,
             };
-        case GET_COURSES_SUCCESS:
+        case actionType.GET_COURSES_SUCCESS:
             return {
                 ...state,
                 courses: action.courses,
                 loading: false,
             };
-        case GET_COURSES_FAILED:
+        case actionType.GET_COURSES_FAILURE:
             return {
                 ...state,
-                error: action.payload,
+                error: action.error,
                 loading: false,
             };
 
         default:
             return state;
 
+        // existingCourses: COURSES,
+        // loggedInMemberCourses: COURSES.filter((course) => course.instructorId === '1'),
         // case ADD_TO_CART:
         //     // récupère index du cours ajouté
         //     const indexCourseToModify = state.existingCourses.findIndex(

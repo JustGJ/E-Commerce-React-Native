@@ -10,9 +10,6 @@ import { editCourse } from '../redux/actions/editCourse.action';
 import globalStyles from '../styles/globalStyles';
 import axios from 'axios';
 
-// import { db } from '../firebase';
-// import { collection, query, onSnapshot, doc, updateDoc, deleteDoc, addDoc } from 'firebase/firestore';
-
 const UserEditCourse = ({ navigation, route }) => {
     const courseId = route.params.courseId;
 
@@ -64,12 +61,6 @@ const UserEditCourse = ({ navigation, route }) => {
                 .catch((error) => {
                     console.log(error);
                 });
-            // await addDoc(collection(db, 'courses'), {
-            //     title,
-            //     desc,
-            //     price,
-            // });
-            // dispatch(createCourse(title, desc, img, parseInt(price)));
         }
         navigation.goBack();
     };

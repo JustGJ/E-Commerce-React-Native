@@ -1,44 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, TextInput, View } from 'react-native';
-import axios from 'axios';
-
 import CourseItem from '../components/CourseItem';
 import EmptyData from '../components/EmptyData';
 import { addToCart } from '../redux/actions/addToCart.action';
-import { getCourses } from '../redux/actions/getCourses.action';
-
-// import { collection, query, onSnapshot, doc, updateDoc, deleteDoc } from 'firebase/firestore';
-// import { db } from '../firebase';
+import { getCoursesRequest } from '../redux/actions/getCourses.action';
+import { RootState } from '../redux/reducers/rootReducer';
 
 const Landing = ({ navigation }) => {
     const dispatch = useDispatch();
-    const existingCourses = useSelector((state) => state.courses.existingCourses); // Tout les cours
-    const coursesToDisplay = existingCourses.filter((course) => course.selected === false); // Affiche uniquement les cours non selectionnés
 
-    const [data, setData] = useState([]);
+    const { courses } = useSelector((state: RootState) => state.courses); // Tout les cours
+
     // Ajout panier : Déclenche ADD_TO_CART dans cart.reducer et courses.reducer
     const handleAddToCart = (course) => {
         dispatch(addToCart(course));
         alert('Article ajouté au panier');
     };
 
-    // useEffect(() => {
-    //     dispatch(getCourses());
-    // }, []);
-    const courses = useSelector((state) => state.courses.courses); // Tout les cours
+    useEffect(() => {
+        dispatch(getCoursesRequest());
+    }, []);
 
     // Si pas de cours dans le store, return un message
-    // if (!coursesToDisplay.length) {
+    // if (!courses.length) {
     //     return <EmptyData text="Pas de cours à afficher" />;
     // }
 
     // Sinon on afficher les cours
     return (
         <View>
-            <TextInput placeholder="yes" />
             <FlatList
-                data={data}
+                data={courses}
                 renderItem={({ item }) => (
                     <CourseItem
                         image={item.img}
@@ -57,3 +50,6 @@ const Landing = ({ navigation }) => {
 };
 
 export default Landing;
+
+// const existingCourses = useSelector((state) => state.courses.existingCourses); // Tout les cours
+// const coursesToDisplay = existingCourses.filter((course) => course.selected === false); // Affiche uniquement les cours non selectionnés
